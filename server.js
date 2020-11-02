@@ -10,6 +10,7 @@ const logger = require("morgan");
 const app = express();
 app.use(express.json());
 const path = require("path");
+const bodyParser = require("body-parser");
 
 app.use(express.urlencoded({ extended: false }));
 const PORT = process.env.PORT || 5000;
@@ -98,6 +99,17 @@ passport.deserializeUser((user, cb) => {
   cb(null, user);
 });
 
+//nodemailer
+const emailRoute = require("./routes/api/emailRoute");
+app.use("/email", emailRoute);
+
+//Static folder
+app.use("../client/public", express.static(path.join(__dirname, "public")));
+
+//body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 // paths, url endpoint routing
 app.use("/", routes);
 
@@ -120,10 +132,10 @@ mongoose.connection.on("connected", () => {
 
 if (process.env.NODE_ENV === "production") {
   // Set static folder
-  app.use(express.static("client/build"));
+  app.use(express.static("../client/build"));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
   });
 }
 

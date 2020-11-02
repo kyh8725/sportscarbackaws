@@ -1,33 +1,30 @@
 {
-  "name": "sportscarbackaws",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
     "server": "nodemon server.js",
-    "client": "npm start --prefix client",
+    "client": "npm start --prefix ../client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/kyh8725/sportscarbackaws.git"
-  },
-  "author": "Daniel Kim",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kyh8725/sportscarbackaws/issues"
-  },
-  "homepage": "https://github.com/kyh8725/sportscarbackaws#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
-    "helmet": "^4.1.1",
+    "helmet": "^4.0.0",
     "mongoose": "^5.10.11",
     "morgan": "^1.10.0",
+    "nodemailer": "^6.4.14",
+    "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^2.0.0",
