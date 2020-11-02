@@ -9,7 +9,6 @@ const helmet = require("helmet");
 const logger = require("morgan");
 const app = express();
 app.use(express.json());
-const path = require("path");
 const bodyParser = require("body-parser");
 
 app.use(express.urlencoded({ extended: false }));
@@ -100,14 +99,11 @@ passport.deserializeUser((user, cb) => {
 const emailRoute = require("./routes/api/emailRoute");
 app.use("/email", emailRoute);
 
-//Static folder
-app.use("../client/public", express.static(path.join(__dirname, "public")));
-
 //body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// paths, url endpoint routing
+const routes = require("./routes");
 app.use("/", routes);
 
 const vehicleRoute = require("./routes/api/vehicleRoute");
