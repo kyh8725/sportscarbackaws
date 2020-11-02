@@ -20,9 +20,6 @@ const passport = require("passport");
 const GitHubStrategy = require("passport-github").Strategy;
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
 
-//import router paths
-const routes = require("./routes");
-
 // require .env files for private data (keys and secrets)
 require("dotenv").config();
 
@@ -129,15 +126,6 @@ mongoose.connect(MONGO_URL, {
 mongoose.connection.on("connected", () => {
   console.log("Connected to DB");
 });
-
-if (process.env.NODE_ENV === "production") {
-  // Set static folder
-  app.use(express.static("../client/build"));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "build", "index.html"));
-  });
-}
 
 app.listen(PORT, () => {
   console.log(`Sever listening on port ${PORT}.`);
